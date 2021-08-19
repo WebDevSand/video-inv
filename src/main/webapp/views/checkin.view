@@ -1,0 +1,152 @@
+<div class="row page-header">
+    <h1>Check In Equipment</h1>
+</div>
+
+<!-- Supervisor Login Modal -->
+<div class="modal fade" id="supervisorLoginModal" tabindex="-1" role="dialog" aria-labelledby="Supervisor Login Modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="loginModalTitle">Supervisor Login</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger fade in" role="alert" id="supervisorNotFoundAlert" style="display: none">
+                    Username or Password are incorrect.
+                </div>
+                <div class="alert alert-warning fade in" role="alert" id="supervisorPermissionsAlert"
+                     style="display: none">
+                    That user is not a designated supervisor.
+                </div>
+                <br>
+                <form class="form-horizontal" id="supervisorLoginForm" onsubmit="loginSupervisor(); return false;">
+                    <div class="form-group">
+                        <label for="supervisorUsername" class="col-sm-2 control-label">Username: </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="supervisorUsername" placeholder="Username"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="supervisorPassword" class="col-sm-2 control-label">Password: </label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="supervisorPassword" placeholder="Password"
+                                   required>
+                        </div>
+                    </div>
+                    <input type="submit" style="display:none"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close &nbsp;
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-primary" onclick="$('#supervisorLoginForm').submit();">Login &nbsp;
+                    <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal-->
+
+
+<div class="row">
+    <div class="col-md-4" id="checklist">
+        <h3>Currently Checked Out</h3>
+        <p id="noItemsOutPara" style="display: none;">
+            You currently have no items checked out. You can however, check in items that you did not originally check
+            out.
+            You will still need supervisor authorization, regardless if you, another team member checked out the item.
+        </p>
+        <p id="itemsOutPara" style="display: none;">
+            The items that you currently have checked out under your name are listed below. You do not need to check in
+            all the items listed below at once. We do however ask that your return items in a timely fashion. You can
+            also check in items that you did not originally check out, a supervisor authorization is still required
+            regardless.
+        </p>
+        <div id="checkinListContainer" class="panel panel-default">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Checked Out On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Items will be added On Load-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h3>Items Being Checked In</h3>
+        <table class="transactionItems table" id="checkinItems">
+            <tr>
+                <th class="icon"></th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Comments</th>
+                <th class="remove">Remove</th>
+            </tr>
+            <!-- Will be added via input form at bottom of the page;-->
+        </table>
+    </div>
+</div>
+
+<div class="row controlBar" id="editToolbar">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-default btn-lg" onclick="reset()">Reset &nbsp;<span class="fa fa-trash"
+                                                                                                 aria-disabled="true"></span>
+        </button>
+    </div>
+    <div class="col-md-6">
+        <form class="form-inline" onsubmit="addItem(); return false;">
+            <div class="form-group">
+                <label for="addItemID">ID:</label>
+                <input type="text" class="form-control" id="addItemID" placeholder="123456">
+            </div>
+            <button type="submit" class="btn btn-default" id="addItemButton">Add to Checkout</button>
+        </form>
+    </div>
+    <div class="col-md-3">
+
+        <button type="button" class="btn btn-primary btn-lg" onclick="submit()">Continue <span class="fa fa-angle-right"
+                                                                                               aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
+
+<div class="row controlBar" id="supervisorToolbar" style="display: none">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-default btn-lg" onclick="backToEdit()"><span class="fa fa-angle-left"
+                                                                                          aria-hidden="true"></span>
+            Back
+        </button>
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-3">
+
+        <button type="button" class="btn btn-success btn-lg" onclick="approveTransaction()">Approve <span
+                class="fa fa-check"
+                aria-disabled="true"></span></button>
+    </div>
+</div>
+
+<script src="js/checkin.js"></script>
+<script>
+    loadCheckedOutItems();
+    document.onkeypress = function () {
+        const inputBox = document.getElementById("addItemID");
+
+        if (document.activeElement.tagName != "INPUT" &&
+            document.activeElement.tagName != "TEXTAREA" &&
+            pageHistory[pageHistory.length - 1] == "checkin") {
+            var value = inputBox.value;
+            inputBox.select();
+            inputBox.value = value;
+        }
+    };
+</script>

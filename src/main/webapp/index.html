@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ITS Video Inventory Manager</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <link rel="apple-touch-icon" href="touch-icon.png">
+
+    <!-- BootStrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/db9852dd1b.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+
+    <link href="lib/sweetalert.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/checkout.css" rel="stylesheet">
+    <link href="css/checkin.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" id="logo" href="#" onclick="showHome()">ITS Video</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li id="menu-home" class="active"><a href="#" onclick="showHome()">Home</a></li>
+                <li id="menu-checkout"><a href="#" class="disabled" id="link-checkout"
+                                          onclick="showPage('checkout', 'menu-checkout'); return false;">Check
+                    Out</a></li>
+                <li id="menu-checkin"><a href="#" class="disabled" id="link-checkin"
+                                         onclick="showPage('checkin', 'menu-checkin')">Check In</a>
+                </li>
+                <li id="menu-admin" style="display: none"><a href="#" id="link-admin"
+                                                             onclick="showPage('admin', 'menu-admin')">Admin</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right ">
+                <li><a href="#" onclick="showStaffLoginModal()" id="userDropdown" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> <span
+                        id="header-user-name">Login</span></a>
+                    <!--class="dropdown-toggle"-->
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Log
+                            Out</a></li>
+                        <li><a href="#" onclick="showStaffInfoModal()"><i class="fa fa-file-o" aria-hidden="true"></i>&nbsp;
+                            Update Info</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- Alerts -->
+<div class="container" id="alerts">
+    <noscript>
+        <div class="alert alert-danger" role="alert" id="noScriptAlert">You do not have JavaScript Enabled! Checkout
+            will not work properly with out it.
+            <br>
+            Here are the <a class="alert-link"
+                            href="http://www.enable-javascript.com/"
+                            target="_blank">
+                instructions how to enable JavaScript in your web browser</a>.
+        </div>
+    </noscript>
+    <div class="alert alert-info fade in" role="alert" id="logoutAlert" style="display: none">You have been Logged
+        Out!
+    </div>
+</div>
+<!-- /alerts -->
+
+<!-- Staff Login Modal -->
+<div class="modal fade" id="staffLoginModal" tabindex="-1" role="dialog" aria-labelledby="Staff Login Modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="loginModalTitle">Staff Login</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger fade in" role="alert" id="userNotFoundAlert" style="display: none">
+                    Username or Password are incorrect.
+                </div>
+                <br>
+                <form class="form-horizontal" id="loginForm" onsubmit="loginStaff(); return false;">
+                    <div class="form-group">
+                        <label for="inputUsername" class="col-sm-2 control-label">Username: </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputUsername" placeholder="Username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label">Password: </label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password"
+                                   required>
+                        </div>
+                    </div>
+                    <input type="submit" style="display:none"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="hideStaffLoginModal()">Close &nbsp;
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-primary" onclick="$('#loginForm').submit();">Login &nbsp;
+                    <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal-->
+
+<!-- Update Staff Modal -->
+<div class="modal fade" id="staffInfoModal" tabindex="-1" role="dialog" aria-labelledby="Update Staff Modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="staffInfoModalTitle">Staff Information</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="updateStaffInfoForm" onsubmit="updateStaff(); return false;">
+                    <div class="form-group">
+                        <label for="updateStaffUsername" class="col-sm-3 control-label">Username:</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static" id="updateStaffUsername">12345678</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateStaffFirstName" class="col-sm-3 control-label">First Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="updateStaffFirstName" value="John" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateStaffLastName" class="col-sm-3 control-label">Last Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="updateStaffLastName" value="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateStaffPassword1" class="col-sm-3 control-label">Password: </label>
+                        <div class="col-sm-8 passwordInput">
+                            <input class="form-control" title="User Password" type="password" id="updateStaffPassword1">
+                            <span class="help-block">Leave blank to not change password.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateStaffPassword2" class="col-sm-3 control-label">Confirm: </label>
+                        <div class="col-sm-8 passwordInput">
+                            <input class="form-control" title="Confirm Password" type="password" id="updateStaffPassword2"
+                            >
+                            <span class="help-block passwordMismatchErr" style="display: none">Please make sure that the passwords match.</span>
+                        </div>
+                    </div>
+                    <input type="submit" style="display:none"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="$('#updateStaffInfoForm').submit();">Update
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- / modal-->
+
+<div class="container" id="view-container">
+    <!-- Will be filled by loadView() in index.js -->
+</div>
+
+<!--Load Javascript/JQuery assets last to ensure fast page load times.-->
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- BootStrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<!--Local JS Assets-->
+<script src="lib/dymo.min.js" type="application/javascript"></script>
+<script src="lib/js.cookie.js" type="application/javascript"></script>
+<script src="lib/sweetalert.min.js" type="application/javascript"></script>
+<script src="lib/sorttable.js" type="application/javascript"></script>
+<script src="lib/moment.js" type="application/javascript"></script>
+<script src="js/common.js" type="application/javascript"></script>
+<script src="js/index.js" type="application/javascript"></script>
+<script src="js/checkout.js" type="application/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<div class="page-header">
+    <h1>ITS Video Inventory Manager</h1>
+</div>
+<p class="lead">Welcome to the ITS Video Productions Inventory Manager.</p>
+<p>To get started, you will need to login, which can be done by clicking on the button
+in the top right corner. If you need an account, or are having trouble logging in, please
+contact your supervisor, or the system administrator.</p>
+
+<p>Software issues can be reported in YouTrack, via the link below. Please be as descriptive as possible, and please
+    include screenshots if applicable.
+    <br>
+    <a href="http://jhadur.sdsu.edu:9000/newIssue?project=VIMS&clearDraft=true&c=" target="_blank">http://jhadur.sdsu.edu:9000</a>
+</p>
+
+<div id="quote" class="jumbotron">
+    <span id="quoteText"></span>
+    <br>
+    <span id="quoteAuthor"></span>
+</div>
+
+<script>
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                var quote = JSON.parse(xmlHttp.responseText);
+                $('#quoteText').text(quote.text);
+                $('#quoteAuthor').text(quote.author);
+                $('#quote').delay(500).animate({ opacity: 1 }, 500);
+            }
+        }
+    };
+
+    xmlHttp.open('GET', "api/quote");
+    xmlHttp.send();
+</script>

@@ -1,0 +1,171 @@
+<div class="child-head">
+    <h2 class=".h2">Items</h2>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">Create New Item
+    </button>
+</div>
+
+<table id="items-list" class="table table-hover sortable">
+    <tr class="header">
+        <th>Public ID</th>
+        <th>Item Name</th>
+        <th>Short Name</th>
+        <th>Serial/Asset</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Last Transaction</th>
+        <th class="button sorttable_nosort">View History</th>
+        <th class="button sorttable_nosort">Edit Item</th>
+    </tr>
+</table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="createModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add new Inventory Item</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" onsubmit="createItem(); return false;" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="itemName" class="col-sm-2 control-label">Name: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Name" type="text" id="itemName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemShortName" class="col-sm-2 control-label">Short Name: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Name" type="text" id="itemShortName"
+                                   maxlength="9">
+                            <p class="help-block">Leave blank for Default "ITS Video".</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemCategory" class="col-sm-2 control-label">Category: </label>
+                        <div class="col-sm-10">
+                            <select class="form-control itemCategory" id="itemCategory" title="Item Category">
+                            <option value="0">No Category</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="printLabel" checked> Print Label
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="assetID" class="col-sm-2 control-label">Serial/Asset: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Asset/Serial Number" type="text" id="assetID">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="$('#createModal').find('form').submit()">Create Item</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Update Inventory Item <span class="updateItemID">123456</span></h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" onsubmit="updateItem(); return false;" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="updateItemID" class="col-sm-2 control-label">Public ID:</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-static updateItemID" id="updateItemID">123456</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateItemName" class="col-sm-2 control-label">Name: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Name" type="text" id="updateItemName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateItemShortName" class="col-sm-2 control-label">Short Name: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Name" type="text" id="updateItemShortName"
+                                   maxlength="9">
+                            <p class="help-block">Leave blank for Default "ITS Video".</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateItemCategory" class="col-sm-2 control-label">Category: </label>
+                        <div class="col-sm-10">
+                            <select class="form-control itemCategory" id="updateItemCategory" title="Item Category">
+                                <option value="0">No Category</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateAssetID" class="col-sm-2 control-label">Serial/Asset: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Asset/Serial Number" type="text" id="updateAssetID">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete" onclick="deleteItem()">Delete Item</button>
+                <button type="button" class="btn btn-info reprint" onclick="reprint()">Reprint Label</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="$('#updateModal').find('form').submit()">Update Item</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="historyModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Item History - ID:<span id="historyItemID">123456</span></h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="transactionHistoryTable">
+                    <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Date</th>
+                        <th>ID</th>
+                        <th>Owner</th>
+                        <th>Number of Items</th>
+                        <th>Approved By</th>
+                        <th>View Receipt</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Items will be added On Load-->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="js/admin-items.js"></script>
+<script>
+    loadItems();
+    loadCategories();
+</script>

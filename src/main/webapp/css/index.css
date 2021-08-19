@@ -1,0 +1,79 @@
+#alerts {
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+
+#clientNotFoundAlert {
+    margin-bottom: 30px;
+}
+
+#create-user-btn {
+    float: right;
+    margin-top: -5px;
+}
+
+#checkoutJumbo {
+    margin-top: 45px;
+    padding-top: 15px;
+}
+
+.hovICO {
+    display: none;
+    padding-left: 10px;
+    padding-bottom: -3px;
+}
+
+.showEditICO:hover .hovICO {
+    display: inline-block;
+}
+
+table.transactionItems {
+    table-layout: fixed;
+}
+
+table.transactionItems tr > td, table.transactionItems tr > th {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    vertical-align: middle;
+}
+
+img.icon {
+    margin: auto;
+    height: 36px;
+}
+
+.jumbotron {
+    margin-top: 40px;
+}
+
+#quote {
+    text-align: center;
+    font-size: 21px;
+    font-weight: lighter;
+    line-height: 1.75;
+    opacity: 0;
+}
+
+#quoteAuthor:before {
+    content: '~ ';
+}
+
+#quoteAuthor {
+    font-style: italic;
+}
+
+#checkoutJumbo {
+    opacity: 0;
+}
+
+#noItemsOut {
+    opacity: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+#noItemsOut .fa-check-circle {
+    margin-right: 7px;
+    color: green;
+}

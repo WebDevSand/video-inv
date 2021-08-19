@@ -1,0 +1,50 @@
+{
+  "Capture": [
+    {
+      "Name": "Body",
+      "Category": "CAM"
+    },
+    {
+      "Name": "Lens",
+      "Category": "LENS"
+    },
+    {
+      "Name": "Storage Media",
+      "Category": "STO"
+    },
+    {
+      "Name": "Battery",
+      "Category": "BATT"
+    }
+  ],
+  "Lighting": [
+    {
+      "Name": "Lights",
+      "Category": "LIGHT"
+    },
+    {
+      "Name": "Light Stand",
+      "Category": "LS"
+    }
+  ],
+  "Audio": [
+    {
+      "Name": "Microphone",
+      "Category": "MIC"
+    },
+    {
+      "Name": "Headphones",
+      "Category": "HP"
+    },
+    {
+      "Name": "Cables",
+      "Category": "CAB"
+    }
+  ],
+  "Mounting": [
+    {
+      "Name": "Tripod",
+      "Category": "TRI"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+<div class="page-header">
+    <h1>Admin Tools</h1>
+</div>
+
+<ul class="nav nav-tabs" id="admin-nav">
+    <li role="presentation" class="admin-menu-index active"><a href="#" onclick="showSection('index')">Home</a></li>
+
+    <li role="presentation" class="admin-menu-items"><a href="#" onclick="showSection('items')">Items</a></li>
+    <li role="presentation" class="admin-menu-macros"><a href="#" onclick="showSection('macros')">Macros</a></li>
+    <li role="presentation" class="admin-menu-categories"><a href="#" onclick="showSection('categories')">Categories</a>
+    </li>
+    <li role="presentation" class="admin-menu-transactions"><a href="#" onclick="showSection('transactions')">Transactions</a>
+    </li>
+    <li role="presentation" class="admin-menu-users"><a href="#" onclick="showSection('users')">Users</a></li>
+</ul>
+
+<div class="container" id="view-container-child">
+</div>
+
+<script src="js/admin.js"></script>
+<script>
+    loadChildView('index');
+</script>

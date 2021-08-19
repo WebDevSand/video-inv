@@ -1,0 +1,48 @@
+body {
+    /*min-height: 2000px;*/
+    padding-top: 50px;
+
+    font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    font-weight: 700;
+    color: black;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #555;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    color: #333;
+}
+
+.active.disabled, .disabled, .disabled:focus, .disabled:hover {
+    color: #999 !important;
+}
+
+.alert {
+    margin-bottom: 0;
+}
+
+#sorttable_sortfwdind,
+#sorttable_sortrevind {
+    display: none;
+}
+
+/*noinspection CssNoGenericFontName*/
+table.sortable th::after, th.sorttable_sorted::after, th.sorttable_sorted_reverse::after {
+    font-family: fontawesome;
+    padding-left: 5px;
+    display: inline-block;
+}
+
+th.sorttable_sorted::after {
+    content: "\f0d8";
+}
+
+th.sorttable_sorted_reverse::after {
+    content: "\f0d7";
+}

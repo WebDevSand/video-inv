@@ -1,0 +1,61 @@
+<p class="lead">Hello trusty administrator! Welcome to the Admin Panel; from here you can configure and manage
+    most of the inventory system. Use your power wisely, as most actions in this area have NO undo button. If
+    you have questions, or experience problems along the way, get in touch with your System Administrators(s).</p>
+
+<div class="jumbotron" id="checkedOutJumbo">
+    <h3>Currently Checked Out</h3>
+    <table class="table" id="itemsOutTable">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Checked Out On</th>
+            <th>View Receipt</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Items will be added On Load-->
+        </tbody>
+    </table>
+</div>
+
+<div class="jumbotron" id="recentJumbo">
+    <h3>Most Recent Transactions</h3>
+    <table class="table" id="transactionsTable">
+        <thead>
+        <tr>
+            <th>Direction</th>
+            <th>Date</th>
+            <th>ID</th>
+            <th>Owner</th>
+            <th>Number of Items</th>
+            <th>Approved By</th>
+            <th>View Receipt</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Items will be added On Load-->
+        </tbody>
+    </table>
+</div>
+
+<div class="jumbotron" id="popularJumbo">
+    <h3>Most Popular Inventory Items</h3>
+    <table class="table" id="popularTable">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Frequency</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Items will be added On Load-->
+        </tbody>
+    </table>
+</div>
+
+<script src="js/admin-index.js"></script>
+<script>
+    loadCheckedOut();
+    loadRecent(5);
+    loadPopular(5);
+</script>

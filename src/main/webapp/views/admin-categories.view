@@ -1,0 +1,94 @@
+<div class="child-head">
+    <h2 class=".h2">Categories</h2>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">Create New Category
+    </button>
+</div>
+
+<table id="category-list" class="table table-hover sortable">
+    <tr class="header">
+        <th>ID</th>
+        <th>Name</th>
+        <th class="sorttable_nosort">Icon</th>
+        <th class="button sorttable_nosort">Edit Category</th>
+    </tr>
+</table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="createModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add new Category</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" onsubmit="addCategory(); return false;" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="categoryName" class="col-sm-2 control-label">Name: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Name" type="text" id="categoryName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryName" class="col-sm-2 control-label">Icon: </label>
+                        <div class="col-sm-10">
+                            <input type="file" id="categoryIcon">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="$('#createModal').find('form').submit()">Create
+                    Category
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Update Category <span class="updateCategoryID">123</span></h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" onsubmit="updateCategory(); return false;" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="updateCategoryID" class="col-sm-2 control-label">ID:</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-static updateCategoryID" id="updateCategoryID">123456</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryName" class="col-sm-2 control-label">Name: </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" title="Item Name" type="text" id="updateCategoryName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryName" class="col-sm-2 control-label">Icon: </label>
+                        <div class="col-sm-10">
+                            <input type="file" id="updateCategoryIcon">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete" onclick="deleteCategory()">Delete Category</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="$('#updateModal').find('form').submit();">Update
+                    Category
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="js/admin-categories.js"></script>
+<script>
+    loadCategories();
+</script>

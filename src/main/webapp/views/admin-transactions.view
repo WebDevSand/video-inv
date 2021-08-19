@@ -1,0 +1,21 @@
+<div class="child-head">
+    <h2 class=".h2">Transactions</h2>
+</div>
+
+<table class="table sortable" id="transactionsTable">
+    <tr class="header">
+    <th>Direction</th>
+        <th>Date</th>
+        <th>ID</th>
+        <th>Owner</th>
+        <th>Number of Items</th>
+        <th>Approved By</th>
+        <th class="sorttable_nosort">View Receipt</th>
+    </tr>
+    <!-- Items will be added On Load-->
+</table>
+
+<script src="js/admin-transactions.js"></script>
+<script>
+    loadTransactions();
+</script>

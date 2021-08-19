@@ -1,0 +1,171 @@
+<div class="child-head">
+    <h2 class=".h2">Users</h2>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">Create User
+    </button>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="createModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add new User</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" onsubmit="createUser(); return false;" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="createUsername" class="col-sm-3 control-label">Username: </label>
+                        <div class="col-sm-9">
+                            <input class="form-control" title="Username" type="text" id="createUsername" required
+                                   style="text-transform: lowercase;">
+                            <p class="help-block">This cannot be changed after user creation.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="createFirstName" class="col-sm-3 control-label">First Name: </label>
+                        <div class="col-sm-9">
+                            <input class="form-control" title="First Name" type="text" id="createFirstName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="createLastName" class="col-sm-3 control-label">Last Name: </label>
+                        <div class="col-sm-9">
+                            <input class="form-control" title="Last Name" type="text" id="createLastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="createPassword1" class="col-sm-3 control-label">Password: </label>
+                        <div class="col-sm-9 passwordInput">
+                            <input class="form-control" title="User Password" type="password" id="createPassword1"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="createPassword2" class="col-sm-3 control-label">Confirm: </label>
+                        <div class="col-sm-9 passwordInput">
+                            <input class="form-control" title="Confirm Password" type="password" id="createPassword2"
+                                   required>
+                            <span class="help-block passwordMismatchErr" style="display: none">Please make sure that the passwords match.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="userTypeRadios" id="regularUserRadio" value="false"
+                                           checked>
+                                    Regular User
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="userTypeRadios" id="supervisorUserRadio" value="true">
+                                    Supervisor - <i>Can Approve Transactions and Access Administrator Panel</i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="$('#createModal').find('form').submit()">Create
+                    User
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Update User <span class="updateUsername">123456</span></h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" onsubmit="updateUser(); return false;" class="form-horizontal">
+                    <input type="hidden" id="updateUserDBID">
+                    <div class="form-group">
+                        <label for="updateUsername" class="col-sm-3 control-label">Username:</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-static updateUsername" id="updateUsername">123456</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateFirstName" class="col-sm-3 control-label">First Name: </label>
+                        <div class="col-sm-9">
+                            <input class="form-control" title="First Name" type="text" id="updateFirstName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateLastName" class="col-sm-3 control-label">Last Name: </label>
+                        <div class="col-sm-9">
+                            <input class="form-control" title="Last Name" type="text" id="updateLastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatePassword1" class="col-sm-3 control-label">Password: </label>
+                        <div class="col-sm-9 passwordInput">
+                            <input class="form-control" title="User Password" type="password" id="updatePassword1">
+                            <span class="help-block">Leave blank to not change password.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatePassword2" class="col-sm-3 control-label">Confirm: </label>
+                        <div class="col-sm-9 passwordInput">
+                            <input class="form-control" title="Confirm Password" type="password" id="updatePassword2"
+                                   >
+                            <span class="help-block passwordMismatchErr" style="display: none">Please make sure that the passwords match.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="userTypeRadios" id="updateRegularUserRadio" value="false">
+                                    Regular User
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="userTypeRadios" id="updateSupervisorUserRadio" value="true">
+                                    Supervisor - <i>Can Approve Transactions and Access Administrator Panel</i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete" onclick="deleteUser()">Delete User</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="$('#updateModal').find('form').submit()">Update
+                    User
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<table id="user-list" class="table table-hover sortable">
+    <tr class="header">
+        <th>ID</th>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Type</th>
+        <th class="button sorttable_nosort">Edit User</th>
+    </tr>
+</table>
+
+<script src="js/admin-users.js"></script>
+<script>
+    loadUsers();
+</script>
+

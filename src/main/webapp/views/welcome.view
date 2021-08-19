@@ -1,0 +1,72 @@
+<div class="page-header">
+    <h1>Welcome <span id="welcomePageName">John Doe</span>!</h1>
+</div>
+<p class="lead">To get started, click on either "Check Out" or "Check In" depending on what your goal is.</p>
+<p>If you have any issues along the way, please let either your supervisor or the system administrator know. Also,
+If you need to update your personal information, like your password, click on the User icon in the top right corner,
+and then choose "Update Info".</p>
+
+<p>Software issues can be reported in YouTrack, via the link below. Please be as descriptive as possible, and please
+include screenshots if applicable.
+<br>
+    <a href="http://morden.sdsu.edu:9000/newIssue?project=VIMS&clearDraft=true&c=" target="_blank">http://morden.sdsu.edu:9000</a>
+</p>
+
+<div class="jumbotron" id="checkoutJumbo">
+    <h3>Currently Checked Out</h3>
+    <table class="table" id="itemsOutTable">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Checked Out On</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Items wil l be added On Load-->
+        </tbody>
+    </table>
+</div>
+
+<div class="jumbotron" id="noItemsOut">
+    <i class="fa fa-check-circle" aria-hidden="true"></i>
+    No Items Checked Out!
+</div>
+
+<script>
+    $('#welcomePageName').text(user.firstName);
+    if (user.supervisor) $('p.lead').text($('p.lead').text() + " Admin tools and utilities can be accessed by clicking" +
+        " on the \"Admin\" link in the menu.");
+
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                var itemsOut = JSON.parse(xmlHttp.responseText);
+
+                if (itemsOut.length == 0) {
+                    $('#checkoutJumbo').hide();
+                    $('#noItemsOut').delay(500).animate({ opacity: 1 }, 500);
+
+                    // Show No Checked out Message
+                } else {
+                    var table = $('#itemsOutTable')[0];
+                    for (var i = 0; i < itemsOut.length; i++) {
+                        var item = itemsOut[i];
+                        var row = table.insertRow();
+                        row.insertCell(0).innerHTML = item.name + " (ID: " + item.pubID + ")";
+                        row.insertCell(1).innerHTML = item.lastTransactionDate;
+                    }
+                    $('#noItemsOut').hide();
+                    $('#checkoutJumbo').delay(500).animate({ opacity: 1 }, 500);
+                }
+            }
+        }
+    };
+
+    xmlHttp.open('GET', "api/user/checkedOut");
+    xmlHttp.setRequestHeader("session", Cookies.get("session"));
+    xmlHttp.send();
+
+
+</script>

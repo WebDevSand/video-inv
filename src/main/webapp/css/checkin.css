@@ -1,0 +1,4 @@
+#checkinListContainer {
+    overflow: auto;
+    max-height: 550px;
+}

@@ -1,0 +1,74 @@
+#view-container-child {
+    margin-top: 10px;
+}
+
+.child-head {
+    border-bottom: 1px solid #ddd;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.child-head > h2 {
+    display: inline;
+}
+
+.child-head > button {
+    float: right;
+}
+
+#items-list {
+    text-align: center;
+    width: 100%;
+
+    margin: 15px auto 20px;
+}
+
+#items-list th {
+    font-size: 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding-left: 0;
+}
+
+#items-list td {
+    text-align: left;
+    padding: 2px 0;
+}
+
+#items-list td:nth-last-child(2),
+#items-list td:nth-last-child(1),
+#items-list th.button {
+    text-align: center;
+}
+
+#category-list td:nth-last-child(1),
+#category-list th.button {
+    text-align: center;
+}
+
+div.modal-footer button.delete, div.modal-footer button.reprint {
+    float: left;
+}
+
+input[type=file] {
+    margin-top: 7px;
+}
+
+#category-list img.categoryIcon {
+    height: 35px;
+}
+
+div.macroListContainer {
+    overflow: auto;
+    max-height: 550px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 0;
+}
+
+#checkedOutJumbo,
+#popularJumbo,
+#recentJumbo {
+    opacity: 0;
+}
